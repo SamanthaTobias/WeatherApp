@@ -45,7 +45,8 @@ public class WeatherService {
 			return parseWeatherResponse(restTemplate.getForObject(url, String.class));
 		} catch (HttpClientErrorException | JSONException e) {
 			log.error("Error fetching weather data.", e);
-			return "Error fetching weather data. Please check the input parameters and try again.";
+			return "Error fetching weather data (" + e.getMessage() + "). Please check the input parameters and try " +
+					"again.";
 		}
 	}
 

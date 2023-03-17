@@ -12,6 +12,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
@@ -45,9 +46,8 @@ class WeatherServiceTest {
 		when(restTemplate.getForObject(any(String.class), eq(String.class)))
 				.thenThrow(HttpClientErrorException.class);
 
-		String expected = "Error fetching weather data. Please check the input parameters and try again.";
 		String actual = weatherService.getWeatherByCity("InvalidCity");
-		assertEquals(expected, actual);
+		assertTrue(actual.contains("Error fetching weather data"));
 	}
 
 }

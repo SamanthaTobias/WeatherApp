@@ -8,4 +8,4 @@ mvn package
 docker build -t weather-app .
 
 # Run the Docker container
-docker run --rm --name weather-app --network my-network -p 9020:9020 weather-app
+docker run --rm --name weather-app --network my-network -p 9020:9020 -e SERVER_PORT=9020 weather-app

@@ -2,13 +2,12 @@ package com.example.weatherapp.service;
 
 import com.example.weatherapp.config.TestConfig;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,10 +16,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = TestConfig.class)
+@Import(TestConfig.class)
+//@SpringJUnitConfig(classes = TestConfig.class)
+//@ContextConfiguration(classes = TestConfig.class)
 class WeatherServiceTest {
 
 	@Autowired
@@ -48,4 +49,5 @@ class WeatherServiceTest {
 		String actual = weatherService.getWeatherByCity("InvalidCity");
 		assertEquals(expected, actual);
 	}
+
 }
